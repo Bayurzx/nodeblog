@@ -6,20 +6,22 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "body-parser": "*",
+    "connect-flash": "*",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.1",
-    "serve-favicon": "*",
-    "monk": "~1.0.1",
     "express-messages": "*",
     "express-session": "^1.17.1",
     "express-validator": "^5.3.1",
-    "connect-flash": "*",
-    "multer": "^1.4.2",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "kerberos": "0.0.24",
     "moment": "*",
-    "body-parser": "*"
+    "mongodb": "^2.0.55",
+    "monk": "https://github.com/vccabral/monk.git",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.2",
+    "serve-favicon": "*"
   }
 }
