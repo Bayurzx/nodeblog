@@ -20,7 +20,8 @@ var db = require('monk')('localhost/nodeblog');
 
 var app = express();
 
-app.locals.moment = moment;
+//app.locals.moment = moment;
+//app.locals.parsezone =
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

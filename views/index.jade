@@ -8,6 +8,9 @@ block content
           a(href='/posts/show/#{post._id}')
             =post.title
 
-        p.meta Posted in #{post.category} by #{post.author} on #{moment(post.date).format("dddd, MMMM Do YYYY, h:mm:ss a +0001")}
-        =post.body
-        a.more(href='/posts/show/#{post._id}') Read
+        p.meta Posted in #{post.category} by #{post.author} on #{moment(post.date).utcOffset(60).format("dddd, MMMM Do YYYY, h:mm:ss a")}
+
+        p.content=(post.body).replace(' @n','\n')
+
+        a.more(href='/posts/show/#{post._id}')
+          p Read
