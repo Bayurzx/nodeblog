@@ -10,7 +10,7 @@ block content
 
         p.meta Posted in #{post.category} by #{post.author} on #{moment(post.date).utcOffset(60).format("dddd, MMMM Do YYYY, h:mm:ss a")}
 
-        p.content=(post.body).replace(' @n','\n')
+        p.content=(post.body)
 
         a.more(href='/posts/show/#{post._id}')
           p Read

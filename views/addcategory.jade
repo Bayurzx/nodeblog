@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+
+  .jumbotron
+    h2 Please enter the category details here.
+    hr
+    div.errors
+      if errors
+        each error, i in errors
+          div.alert.alert-danger #{error.msg}
+    form(method='post', action='/categories/add')
+      .form-group
+        label Name:
+        input.form-control(name="name", type='text', placeholder='Add Name')
+
+      input.btn.btn-primary(type="Submit", name='submit', value="Save")

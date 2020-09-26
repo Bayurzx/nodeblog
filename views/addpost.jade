@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to the Add page.
+  .jumbotron
+    h2 Please enter the blog details here.
+    hr
+    div.errors
+      if errors
+        each error, i in errors
+          div.alert.alert-danger #{error.msg}
+    form(method='post', action='/posts/add', enctype="multipart/form-data")
+      .form-group
+        label Title:
+        input.form-control(name="title", type='text', placeholder='Add title')
+
+      .form-group
+        label Category:
+        select.form-control(name="category")
+          option(value="")
+          if categories
+            each category, i in categories
+              option(value="#{category.name}") #{category.name}
+
+      .form-group
+        label Body:
+        textarea.form-control(name='body', id='editor', rows="10")
+
+      .form-group
+        label Image:
+        input.form-control(name="mainimage", type='file')
+
+      .form-group
+        label Author:
+        select.form-control(name="author")
+          option(value="Adebayo Omolumo") Adebayo Omolumo
+          option(value="John Bravo") John Bravo
+
+      input.btn.btn-primary(type="Submit", name='submit', value="Save")
+      script(src='/ckeditor/ckeditor.js')
+      script.
+        ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .then( editor => {
+        window.editor = editor;
+        } )
+        .catch( error => {
+        console.error( 'There was a problem initializing the editor.', error );
+        } );
