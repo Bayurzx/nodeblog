@@ -15,6 +15,7 @@ router.get('/show/:category', function(req, res, next) {
   });
 });
 
+// Trying to only stories related to Author
 router.get('/show/:author', function(req, res, next) {
   var auth = db.get('posts');
   auth.find({author: req.params.author}, {}, function(err, posts){
