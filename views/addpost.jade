@@ -34,8 +34,11 @@ block content
       .form-group
         label Author:
         select.form-control(name="author")
-          option(value="Adebayo Omolumo") Adebayo Omolumo
-          option(value="John Bravo") John Bravo
+          option(value="")
+          if categories
+            each category, i in categories
+              if category.author
+                option(value="#{category.author}") #{category.author}
 
       input.btn.btn-primary(type="Submit", name='submit', value="Save")
       script(src='/ckeditor/ckeditor.js')

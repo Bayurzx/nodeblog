@@ -5,6 +5,27 @@ var flash = require('connect-flash');
 var mongo = require('mongodb');
 var db = require('monk')('localhost/nodeblog');
 
+router.get('/show/:category', function(req, res, next) {
+  var posts = db.get('posts');
+  posts.find({category: req.params.category}, {}, function(err, posts){
+    res.render('index', {
+      'title': req.params.category,
+      'posts': posts
+    });
+  });
+});
+
+router.get('/show/:author', function(req, res, next) {
+  var auth = db.get('posts');
+  auth.find({author: req.params.author}, {}, function(err, posts){
+    res.render('index', {
+      'title': req.params.author,
+      'posts': posts
+    });
+  });
+});
+
+
 /* GET Posts/add listing. */
 router.get('/add', function(req, res, next) {
     res.render('addcategory', {
@@ -15,11 +36,14 @@ router.get('/add', function(req, res, next) {
 router.post('/add', function (req, res, next){
 
   //Get the form values
-  var name = req.body.name;
+  var category = req.body.category;
+  var author = req.body.author;
+
 
 
   //Form Validation
-  req.checkBody('name', 'Please enter the name').notEmpty();
+  req.checkBody('category', 'Please enter the category').notEmpty();
+  req.checkBody('author', 'Please enter the author').notEmpty();
 
   //check errors
   var errors = req.validationErrors();
@@ -29,12 +53,14 @@ router.post('/add', function (req, res, next){
   }  else {
     var categories = db.get('categories')
     categories.insert({
-      'name' : name,
+      'name' : category,
+      'author' : author,
+
     }, function(err, post){
       if (err){
         res.send(err);
       }else {
-        req.flash('success', 'categories was added!');
+        req.flash('success', category+' category and the author '+author+' was added!');
         res.location('/');
         res.redirect('/');
       }

@@ -24,6 +24,12 @@ var app = express();
 
 app.locals.moment = moment;
 
+//Truncate the text at the homepage
+app.locals.truncaText = function(text, length){
+  var truncatedText = text.substring(0, length);
+  return truncatedText;
+}
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

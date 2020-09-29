@@ -8,9 +8,13 @@ block content
           a(href='/posts/show/#{post._id}')
             =post.title
 
-        p.meta Posted in #{post.category} by #{post.author} on #{moment(post.date).utcOffset(60).format("dddd, MMMM Do YYYY, h:mm:ss a")}
-
-        p.content=(post.body)
-
+        div.container-fixed
+          p.meta Posted in 
+            #[a(href='/categories/show/#{post.category}') #{post.category}] by #[a(href='/categories/show/#{post.author}') #{post.author}] on #{moment(post.date).utcOffset(60).format("dddd, MMMM Do YYYY, h:mm:ss a")}
+          
+          div.content
+            !=truncaText(post.body,400)+" ..."
+          div#right  
+            img(src="/images/uploaded/#{post.mainimage}")
         a.more(href='/posts/show/#{post._id}')
           p Read

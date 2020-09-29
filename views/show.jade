@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  h1.mec=post.title
+  div.show
+    img(src="/images/uploaded/#{post.mainimage}")
+    p.meca Posted in 
+      #[a(href='/categories/show/#{post.category}') #{post.category}] by #[a(href='/categories/show/#{post.author}') #{post.author}] on #{moment(post.date).utcOffset(60).format("dddd, MMMM Do YYYY, h:mm:ss a")}
+    p!=post.body
+  hr
+  .jumbotron
+    if post.comments
+      h1.mec Comments
+      each comment, i in post.comments
+        div.comment
+          p 
+            span.comment-name #{comment.name}
+          p.comment-body!=comment.body
+          hr
+    br
+    hr
+  .jumbotron
+    h3 Add comment
+    if errors
+      ul.errors
+        each error, i in errors
+          li.alert.alert-danger #{error.msg}
+    form.comment-form(method='post', action='/posts/addcomment')
+      input(name='postid', type='hidden', value='#{post._id}')
+    
+      .form-group
+        label Name
+        input.form-control(name='name', type='text')
+
+      .form-group
+        label Email
+        input.form-control(name='email', type='email')
+
+      .form-group
+        label Body
+        textarea.form-control(name='body', type='text', rows='8')
+      br
+      input.btn.btn-success(name='submit', type='submit', value='Add Comment')
