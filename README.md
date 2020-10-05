@@ -1,2 +1,2 @@
 # nodeblog
-Learning nodeblog
+Learning nodeblog !
